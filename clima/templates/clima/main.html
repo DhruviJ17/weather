@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>WEATHER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
+
+<body bgcolor="black">
+    <section class="section">
+        <div class="columns">
+            <form method="POST">
+                {% csrf_token %}
+                {{form.name}}
+                <div>
+                    <button type="submit">
+                        ENTER CITY
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="box">
+        <div>
+            {% for weather in weather_info %}
+            <div class="box">
+                <figure>
+                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png">
+                </figure>
+                <div>
+                    <p>
+                    <h1 class="title">{{weather.city}}</h1>
+                    <br>
+                    <h1 class="subtitle">{{weather.temperature}}° C</h1>
+                    <br> {{weather.description}}
+                    </p>
+                </div><br>
+                <div class="media-left">
+                    <a href="{% url 'delete_city' weather.city %}">
+                        <button>DELETE</button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+</body>
+{% endblock %}
+
+</html>

@@ -1,0 +1,11 @@
+{% extends 'clima/main.html' %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div>{{sol}}</div>
+</form>
+
+<a href="{% url 'home' %}">goto home</a>
+
+{% endblock %}
